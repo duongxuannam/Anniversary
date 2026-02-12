@@ -42,3 +42,13 @@ npm run prepare
 5. Push lên nhánh `main`. Workflow sẽ build Astro ra thư mục `docs` và tự commit lại vào `main`.
 
 > Lưu ý: `base` đang là `/Anniversary`, nếu đổi tên repo thì cập nhật lại giá trị này.
+
+
+### Khắc phục lỗi Jekyll `Invalid YAML front matter`
+
+Nếu bạn thấy log kiểu `Invalid YAML front matter in src/pages/index.astro` nghĩa là Pages đang cố build bằng Jekyll ở sai thư mục.
+
+- Đảm bảo **Settings → Pages → Source = Deploy from a branch**
+- Chọn đúng **Branch: `main`** và **Folder: `/docs`**
+- Repo đã có file `.nojekyll` để tránh Jekyll parse nhầm source Astro
+
