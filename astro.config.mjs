@@ -6,4 +6,5 @@ export default defineConfig({
   site,
   base: "/Anniversary",
   output: "static",
+  outDir: "./docs",
 });

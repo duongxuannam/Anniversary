@@ -33,10 +33,12 @@ Lệnh dưới sẽ cấu hình hook path vào `.githooks`:
 npm run prepare
 ```
 
-## Deploy GitHub Pages
+## Deploy GitHub Pages (Branch: `main` / folder: `docs`)
 
-1. Thiết lập biến môi trường `SITE_URL` (ví dụ: `https://<your-github-username>.github.io`) trong GitHub Actions/Repository settings hoặc local env.
-2. Push lên nhánh `main`.
-3. Workflow `Deploy to GitHub Pages` sẽ tự build và publish.
+1. Vào **Settings → Pages** của repo `duongxuannam/Anniversary`.
+2. Ở mục **Build and deployment / Source**, chọn **Deploy from a branch**.
+3. Chọn branch **main** và folder **/docs**, rồi Save.
+4. Thiết lập biến môi trường `SITE_URL` (ví dụ: `https://duongxuannam.github.io`) trong repo secrets/variables hoặc local env.
+5. Push lên nhánh `main`. Workflow sẽ build Astro ra thư mục `docs` và tự commit lại vào `main`.
 
 > Lưu ý: `base` đang là `/Anniversary`, nếu đổi tên repo thì cập nhật lại giá trị này.
