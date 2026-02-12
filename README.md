@@ -35,7 +35,7 @@ npm run prepare
 
 ## Deploy GitHub Pages
 
-1. Vào `astro.config.mjs`, thay `https://<your-github-username>.github.io` bằng username GitHub thật.
+1. Thiết lập biến môi trường `SITE_URL` (ví dụ: `https://<your-github-username>.github.io`) trong GitHub Actions/Repository settings hoặc local env.
 2. Push lên nhánh `main`.
 3. Workflow `Deploy to GitHub Pages` sẽ tự build và publish.
 
