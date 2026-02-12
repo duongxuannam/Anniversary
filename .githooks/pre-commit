@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo 'Running Biome checks (Rust) before commit...'
+npx @biomejs/biome check .
