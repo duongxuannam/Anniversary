@@ -87,6 +87,13 @@ const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 *
         font-size: clamp(1.8rem, 5vw, 3.2rem);
       }
 
+      .hero-title {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        align-items: center;
+      }
+
       .names {
         color: var(--pink);
         text-shadow: 0 4px 16px rgba(255, 111, 163, 0.35);
@@ -134,28 +141,7 @@ const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 *
       .audio-section {
         margin-top: 2rem;
         text-align: center;
-      }
-
-      .cute-btn {
-        border: 0;
-        background: linear-gradient(120deg, var(--pink), #ff79d8);
-        color: #fff;
-        font-size: 1rem;
-        border-radius: 999px;
-        padding: 0.8rem 1.2rem;
-        cursor: pointer;
-        transition: transform 0.24s ease, filter 0.24s ease;
-      }
-
-      .cute-btn:hover {
-        transform: translateY(-3px) scale(1.03);
-        filter: brightness(1.1);
-      }
-
-      .footer-note {
-        margin-top: 2rem;
-        text-align: center;
-        opacity: 0.8;
+        opacity: 0.85;
       }
     </style>
   </head>
@@ -173,8 +159,9 @@ const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 *
 
     <main class='container'>
       <section class='hero'>
-        <h1>
-          Kỷ niệm 4 năm yêu nhau của <span class='names'>Xuân Nam ❤ Diệu Linh</span>
+        <h1 class='hero-title'>
+          <span>Kỷ niệm 4 năm yêu nhau</span>
+          <span class='names'>Xuân Nam ❤ Diệu Linh</span>
         </h1>
         <p class='date'>13/02/2022 - 14/02/2026</p>
         <span class='counter'>{totalDays} ngày cùng nhau, và còn mãi về sau ✨</span>
@@ -196,20 +183,14 @@ const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 *
       </section>
 
       <section class='audio-section'>
-        <button class='cute-btn' id='playMelody' type='button'>
-          🎵 Bấm để nghe giai điệu đáng yêu
-        </button>
-        <p>Âm thanh được tạo bằng Web Audio API để trang luôn gọn nhẹ và tải nhanh.</p>
+        <p>🎵 Giai điệu yêu thương sẽ tự phát khi trang mở.</p>
       </section>
-
-      <p class='footer-note'>Made with lots of love for Xuân Nam &amp; Diệu Linh 💖</p>
     </main>
 
     <script>
-      const melodyButton = document.querySelector('#playMelody');
+      const audioContext = new window.AudioContext();
 
-      const playCuteMelody = async () => {
-        const audioContext = new window.AudioContext();
+      const playCuteMelody = () => {
         const notes = [523.25, 659.25, 783.99, 659.25, 523.25, 659.25, 783.99, 1046.5];
         let time = audioContext.currentTime;
 
@@ -234,9 +215,18 @@ const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 *
         }
       };
 
-      melodyButton?.addEventListener('click', async () => {
-        await playCuteMelody();
-      });
+      const startMelody = async () => {
+        if (audioContext.state === 'suspended') {
+          await audioContext.resume();
+        }
+
+        playCuteMelody();
+      };
+
+      startMelody();
+
+      window.addEventListener('pointerdown', startMelody, { once: true });
+      window.addEventListener('keydown', startMelody, { once: true });
     </script>
   </body>
 </html>
