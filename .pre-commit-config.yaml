@@ -1,0 +1,9 @@
+# Optional if your team uses pre-commit framework.
+repos:
+  - repo: local
+    hooks:
+      - id: biome-check
+        name: Biome check
+        entry: npx @biomejs/biome check .
+        language: system
+        pass_filenames: false
