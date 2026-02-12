@@ -1,0 +1,242 @@
+---
+const startDate = new Date('2022-02-13T00:00:00+07:00');
+const endDate = new Date('2026-02-14T00:00:00+07:00');
+const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+---
+
+<html lang='vi'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
+    <meta
+      name='description'
+      content='Kỷ niệm 4 năm yêu nhau của Xuân Nam và Diệu Linh (13/02/2022 - 14/02/2026).'
+    />
+    <title>Kỷ niệm 4 năm yêu nhau | Xuân Nam ❤ Diệu Linh</title>
+    <style>
+      :root {
+        --pink: #ff6fa3;
+        --rose: #ff90b3;
+        --dark: #2d1a28;
+        --soft: #fff6fb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+        color: var(--dark);
+        background: radial-gradient(circle at top, #ffd6e7, #fff);
+        overflow-x: hidden;
+      }
+
+      .floating-hearts {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .heart {
+        position: absolute;
+        color: rgba(255, 100, 156, 0.4);
+        font-size: clamp(18px, 2.2vw, 36px);
+        animation: floatUp var(--duration) linear infinite;
+        animation-delay: var(--delay);
+      }
+
+      @keyframes floatUp {
+        from {
+          transform: translateY(105vh) scale(0.6);
+          opacity: 0;
+        }
+
+        20% {
+          opacity: 1;
+        }
+
+        to {
+          transform: translateY(-20vh) scale(1);
+          opacity: 0;
+        }
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 2.5rem 1.2rem 4rem;
+      }
+
+      .hero {
+        text-align: center;
+        padding: 2rem;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 14px 40px rgba(255, 105, 149, 0.18);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 5vw, 3.2rem);
+      }
+
+      .names {
+        color: var(--pink);
+        text-shadow: 0 4px 16px rgba(255, 111, 163, 0.35);
+      }
+
+      .date {
+        margin: 1rem 0;
+        font-weight: 600;
+      }
+
+      .counter {
+        display: inline-block;
+        margin-top: 0.6rem;
+        padding: 0.8rem 1.2rem;
+        border-radius: 999px;
+        background: linear-gradient(120deg, var(--pink), var(--rose));
+        color: #fff;
+        font-weight: 700;
+      }
+
+      .love-grid {
+        margin-top: 2rem;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .card {
+        border-radius: 18px;
+        padding: 1rem;
+        background: #fff;
+        border: 1px solid #ffe3ef;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 14px 25px rgba(255, 126, 171, 0.24);
+      }
+
+      .card h2 {
+        margin-top: 0;
+      }
+
+      .audio-section {
+        margin-top: 2rem;
+        text-align: center;
+      }
+
+      .cute-btn {
+        border: 0;
+        background: linear-gradient(120deg, var(--pink), #ff79d8);
+        color: #fff;
+        font-size: 1rem;
+        border-radius: 999px;
+        padding: 0.8rem 1.2rem;
+        cursor: pointer;
+        transition: transform 0.24s ease, filter 0.24s ease;
+      }
+
+      .cute-btn:hover {
+        transform: translateY(-3px) scale(1.03);
+        filter: brightness(1.1);
+      }
+
+      .footer-note {
+        margin-top: 2rem;
+        text-align: center;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='floating-hearts' aria-hidden='true'>
+      {Array.from({ length: 16 }, (_, i) => (
+        <span
+          class='heart'
+          style={`left: ${5 + i * 6}%; --delay: ${i * 0.7}s; --duration: ${6 + (i % 5)}s;`}
+        >
+          ❤
+        </span>
+      ))}
+    </div>
+
+    <main class='container'>
+      <section class='hero'>
+        <h1>
+          Kỷ niệm 4 năm yêu nhau của <span class='names'>Xuân Nam ❤ Diệu Linh</span>
+        </h1>
+        <p class='date'>13/02/2022 - 14/02/2026</p>
+        <span class='counter'>{totalDays} ngày cùng nhau, và còn mãi về sau ✨</span>
+      </section>
+
+      <section class='love-grid'>
+        <article class='card'>
+          <h2>Khoảnh khắc đầu tiên</h2>
+          <p>Ngày ta chọn nắm tay nhau, mọi thứ đều trở nên dịu dàng và ý nghĩa hơn.</p>
+        </article>
+        <article class='card'>
+          <h2>Những điều đáng yêu</h2>
+          <p>Từ tin nhắn chúc ngủ ngon cho đến những cái ôm thật chặt, ta luôn ở bên nhau.</p>
+        </article>
+        <article class='card'>
+          <h2>Lời hứa tương lai</h2>
+          <p>Cùng nhau trưởng thành, cùng nhau mỉm cười và tạo nên thật nhiều kỷ niệm đẹp.</p>
+        </article>
+      </section>
+
+      <section class='audio-section'>
+        <button class='cute-btn' id='playMelody' type='button'>
+          🎵 Bấm để nghe giai điệu đáng yêu
+        </button>
+        <p>Âm thanh được tạo bằng Web Audio API để trang luôn gọn nhẹ và tải nhanh.</p>
+      </section>
+
+      <p class='footer-note'>Made with lots of love for Xuân Nam &amp; Diệu Linh 💖</p>
+    </main>
+
+    <script>
+      const melodyButton = document.querySelector('#playMelody');
+
+      const playCuteMelody = async () => {
+        const audioContext = new window.AudioContext();
+        const notes = [523.25, 659.25, 783.99, 659.25, 523.25, 659.25, 783.99, 1046.5];
+        let time = audioContext.currentTime;
+
+        for (const note of notes) {
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+
+          oscillator.type = 'sine';
+          oscillator.frequency.value = note;
+
+          gainNode.gain.setValueAtTime(0, time);
+          gainNode.gain.linearRampToValueAtTime(0.12, time + 0.03);
+          gainNode.gain.linearRampToValueAtTime(0, time + 0.32);
+
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+
+          oscillator.start(time);
+          oscillator.stop(time + 0.34);
+
+          time += 0.16;
+        }
+      };
+
+      melodyButton?.addEventListener('click', async () => {
+        await playCuteMelody();
+      });
+    </script>
+  </body>
+</html>
