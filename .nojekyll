@@ -1,0 +1,2 @@
+# Keep this file at repo root to force GitHub Pages to skip Jekyll processing.
+# This prevents Jekyll from trying to parse Astro source files when Pages source is misconfigured.

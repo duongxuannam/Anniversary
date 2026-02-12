@@ -1,0 +1,25 @@
+{
+  "name": "anniversary-xuannam-dieulinh",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check && biome check .",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "prepare": "git config core.hooksPath .githooks"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@biomejs/biome": "^1.9.4",
+    "astro": "^5.2.0",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}
