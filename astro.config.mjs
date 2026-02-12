@@ -1,7 +1,7 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: 'https://<your-github-username>.github.io',
-  base: '/Anniversary',
-  output: 'static'
+  site: "https://<your-github-username>.github.io",
+  base: "/Anniversary",
+  output: "static",
 });
