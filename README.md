@@ -1,6 +1,6 @@
 # 💖 Anniversary Website — Xuân Nam & Diệu Linh
 
-Project Astro + TypeScript để kỷ niệm 4 năm yêu nhau (13/02/2022 - 14/02/2026).
+Project Astro + TypeScript để kỷ niệm 4 năm yêu nhau (13/02/2022 -  13/02/2026).
 
 ## Tech stack
 
