@@ -2,7 +2,9 @@
 const startDate = new Date("2022-02-13T00:00:00+07:00");
 const endDate = new Date("2026-02-14T00:00:00+07:00");
 const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 ---
 
 <html lang='vi'>
