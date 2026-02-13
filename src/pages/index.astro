@@ -1,6 +1,6 @@
 ---
 const startDate = new Date("2022-02-13T00:00:00+07:00");
-const endDate = new Date("2026-02-14T00:00:00+07:00");
+const endDate = new Date("2026-02-13T00:00:00+07:00");
 const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
 const baseUrl = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -13,7 +13,7 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
     <meta name='viewport' content='width=device-width' />
     <meta
       name='description'
-      content='Kỷ niệm 4 năm yêu nhau của Xuân Nam và Diệu Linh (13/02/2022 -  13/02/2026).'
+      content='Kỷ niệm 4 năm yêu nhau của Xuân Nam và Diệu Linh (13/02/2022 - 13/02/2026).'
     />
     <title>Kỷ niệm 4 năm yêu nhau | Xuân Nam ❤ Diệu Linh</title>
     <style>
@@ -33,7 +33,10 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
         min-height: 100vh;
         font-family: 'Be Vietnam Pro', system-ui, sans-serif;
         color: var(--dark);
-        background: radial-gradient(circle at top, #ffd6e7, #fff);
+        background:
+          radial-gradient(circle at 15% 8%, rgba(255, 189, 213, 0.65), transparent 22%),
+          radial-gradient(circle at 80% 12%, rgba(255, 170, 201, 0.5), transparent 24%),
+          linear-gradient(180deg, #ffdce9 0%, #ffeaf3 40%, #fff5fa 100%);
         overflow-x: hidden;
       }
 
@@ -50,6 +53,83 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
         font-size: clamp(18px, 2.2vw, 36px);
         animation: floatUp var(--duration) linear infinite;
         animation-delay: var(--delay);
+      }
+
+      .side-doodles {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .doodle {
+        position: absolute;
+        width: 132px;
+        height: 132px;
+        opacity: 0.78;
+      }
+
+      .doodle-left {
+        left: 1.2rem;
+        top: 38%;
+        transform: rotate(-8deg);
+      }
+
+      .doodle-right {
+        right: 1.2rem;
+        top: 42%;
+        transform: rotate(8deg);
+      }
+
+      .doodle-heart {
+        position: absolute;
+        inset: 0;
+        transform: rotate(-45deg);
+      }
+
+      .doodle-heart::before,
+      .doodle-heart::after {
+        content: '';
+        position: absolute;
+        background: rgba(255, 142, 187, 0.32);
+        border: 3px solid rgba(235, 95, 149, 0.55);
+      }
+
+      .doodle-heart::before {
+        width: 60px;
+        height: 92px;
+        left: 36px;
+        top: 35px;
+        border-radius: 60px 60px 12px 12px;
+      }
+
+      .doodle-heart::after {
+        width: 92px;
+        height: 60px;
+        left: 20px;
+        top: 50px;
+        border-radius: 60px 60px 12px 12px;
+        transform: rotate(90deg);
+      }
+
+      .doodle-spark {
+        position: absolute;
+        border: 2px dashed rgba(238, 114, 163, 0.5);
+        border-radius: 999px;
+      }
+
+      .doodle-left .doodle-spark {
+        width: 54px;
+        height: 54px;
+        left: -12px;
+        top: -6px;
+      }
+
+      .doodle-right .doodle-spark {
+        width: 42px;
+        height: 42px;
+        right: -8px;
+        bottom: 2px;
       }
 
       @keyframes floatUp {
@@ -76,13 +156,96 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
         padding: 2.5rem 1.2rem 4rem;
       }
 
+      .container::before {
+        content: '';
+        position: absolute;
+        inset: 1rem 0.2rem 0.8rem;
+        border: 2px dashed rgba(255, 255, 255, 0.65);
+        border-radius: 28px;
+        pointer-events: none;
+      }
+
+      .valentine-poster {
+        position: relative;
+        text-align: center;
+        margin-bottom: 1.4rem;
+        padding: 2rem 1.2rem 1.4rem;
+        border-radius: 30px;
+        background: linear-gradient(165deg, rgba(255, 255, 255, 0.9), rgba(255, 225, 238, 0.88));
+        border: 1px solid rgba(255, 173, 205, 0.75);
+        box-shadow: 0 18px 34px rgba(236, 101, 152, 0.22);
+        overflow: hidden;
+      }
+
+      .valentine-poster::before {
+        content: '❤  ❤  ❤';
+        position: absolute;
+        top: 0.6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        letter-spacing: 0.55rem;
+        color: rgba(238, 102, 152, 0.45);
+      }
+
+      .poster-heart {
+        margin: 0 auto;
+        width: min(82vw, 360px);
+        aspect-ratio: 1;
+        background: #fff;
+        border: 8px solid #ffa8cb;
+        border-radius: 50% 50% 44% 44%;
+        transform: rotate(-45deg);
+        display: grid;
+        place-items: center;
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.65);
+      }
+
+      .poster-heart-inner {
+        transform: rotate(45deg);
+      }
+
+      .poster-label {
+        margin: 0;
+        color: #ff6ea6;
+        font-size: 0.84rem;
+        letter-spacing: 0.22rem;
+        font-weight: 700;
+      }
+
+      .poster-title {
+        margin: 0.35rem 0 0;
+        font-size: clamp(2rem, 8vw, 3rem);
+        color: #f05d98;
+        text-shadow: 0 7px 20px rgba(243, 103, 158, 0.28);
+      }
+
+      .poster-date {
+        margin: 0.42rem 0 0;
+        font-weight: 600;
+        color: #cc4f81;
+      }
+
       .hero {
+        position: relative;
+        overflow: hidden;
         text-align: center;
         padding: 2rem;
         border-radius: 24px;
         background: rgba(255, 255, 255, 0.65);
         backdrop-filter: blur(8px);
         box-shadow: 0 14px 40px rgba(255, 105, 149, 0.18);
+      }
+
+      .hero::after {
+        content: '';
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        right: -80px;
+        top: -130px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 149, 187, 0.55), rgba(255, 149, 187, 0));
+        pointer-events: none;
       }
 
       h1 {
@@ -105,6 +268,13 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
       .date {
         margin: 1rem 0;
         font-weight: 600;
+      }
+
+      .hero-subtitle {
+        margin: 0.35rem auto 0;
+        max-width: 560px;
+        line-height: 1.65;
+        opacity: 0.86;
       }
 
       .counter {
@@ -139,6 +309,24 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
 
       .card h2 {
         margin-top: 0;
+      }
+
+      .poem {
+        margin-top: 1.8rem;
+        padding: 1.4rem 1.2rem;
+        border-radius: 18px;
+        border: 1px solid #ffd6e8;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 237, 245, 0.9));
+        text-align: center;
+      }
+
+      .poem p {
+        margin: 0.4rem 0;
+        line-height: 1.7;
+      }
+
+      .poem .line-soft {
+        color: #8f4967;
       }
 
       .gallery {
@@ -179,11 +367,26 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
         display: block;
         width: 100%;
         height: auto;
+        transition: transform 0.6s ease;
+      }
+
+      .photo:hover img {
+        transform: scale(1.03);
       }
 
       @media (max-width: 640px) {
+        .container::before {
+          display: none;
+        }
+
         .photo-grid {
           column-count: 1;
+        }
+      }
+
+      @media (max-width: 1100px) {
+        .side-doodles {
+          display: none;
         }
       }
 
@@ -219,36 +422,64 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
         </span>
       ))}
     </div>
+    <div class='side-doodles' aria-hidden='true'>
+      <span class='doodle doodle-left'>
+        <span class='doodle-heart'></span>
+        <span class='doodle-spark'></span>
+      </span>
+      <span class='doodle doodle-right'>
+        <span class='doodle-heart'></span>
+        <span class='doodle-spark'></span>
+      </span>
+    </div>
 
     <main class='container'>
+      <section class='valentine-poster' aria-label='Thiệp Valentine'>
+        <div class='poster-heart'>
+          <div class='poster-heart-inner'>
+            <p class='poster-label'>HAPPY</p>
+            <h2 class='poster-title'>Valentine's Day</h2>
+            <p class='poster-date'>February 13th</p>
+          </div>
+        </div>
+      </section>
+
       <section class='hero'>
         <h1 class='hero-title'>
           <span>Kỷ niệm 4 năm yêu nhau</span>
           <span class='names'>Xuân Nam ❤ Diệu Linh</span>
         </h1>
-        <p class='date'>13/02/2022 -  13/02/2026</p>
+        <p class='date'>13/02/2022 - 13/02/2026</p>
+        <p class='hero-subtitle'>
+          Mỗi ngày đi qua, mình lại thương nhau thêm một chút, nhẹ nhàng như sóng vỗ và ấm áp như nắng chiều.
+        </p>
         <span class='counter'>{totalDays} ngày cùng nhau, và còn mãi về sau ✨</span>
       </section>
 
       <section class='love-grid'>
         <article class='card'>
           <h2>Khoảnh khắc đầu tiên</h2>
-          <p>Ngày ta chọn nắm tay nhau, mọi thứ đều trở nên dịu dàng và ý nghĩa hơn.</p>
+          <p>Ngày ta chọn nắm tay nhau, mọi thứ đều dịu lại, như thể thế giới chỉ còn hai đứa mình.</p>
         </article>
         <article class='card'>
           <h2>Những điều đáng yêu</h2>
-          <p>Từ tin nhắn chúc ngủ ngon cho đến những cái ôm thật chặt, ta luôn ở bên nhau.</p>
+          <p>Từ lời chúc ngủ ngon, cái ôm thật chặt, đến ánh mắt quen thuộc, tất cả đều là bình yên.</p>
         </article>
         <article class='card'>
           <h2>Lời hứa tương lai</h2>
-          <p>Cùng nhau trưởng thành, cùng nhau mỉm cười và tạo nên thật nhiều kỷ niệm đẹp.</p>
+          <p>Cùng lớn lên, cùng chữa lành, cùng mỉm cười và viết tiếp những chương thật đẹp của tụi mình.</p>
         </article>
+      </section>
+
+      <section class='poem'>
+        <p>Ta không cần điều gì quá lớn lao,</p>
+        <p class='line-soft'>chỉ cần mỗi sáng thức dậy vẫn thấy nhau trong tim.</p>
       </section>
 
       <section class='gallery'>
         <div class='gallery-header'>
           <h2>Khoảnh khắc của tụi mình</h2>
-          <p>Mỗi tấm hình là một lần tim rung lên thêm chút nữa.</p>
+          <p>Mỗi tấm hình là một lần trái tim rung lên thêm chút nữa.</p>
         </div>
 
         <div class='photo-grid'>
