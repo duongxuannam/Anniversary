@@ -2,9 +2,9 @@ import { defineConfig } from "astro/config";
 
 const site = process.env.SITE_URL ?? "https://example.github.io";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   site,
-  base: "/Anniversary",
+  base: command === "dev" ? "/" : "/Anniversary",
   output: "static",
   outDir: "./docs",
-});
+}));
