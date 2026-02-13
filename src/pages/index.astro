@@ -2,6 +2,7 @@
 const startDate = new Date("2022-02-13T00:00:00+07:00");
 const endDate = new Date("2026-02-14T00:00:00+07:00");
 const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <html lang='vi'>
@@ -138,10 +139,70 @@ const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 *
         margin-top: 0;
       }
 
-      .audio-section {
-        margin-top: 2rem;
+      .gallery {
+        margin-top: 2.2rem;
+      }
+
+      .gallery-header {
         text-align: center;
-        opacity: 0.85;
+        margin-bottom: 1rem;
+      }
+
+      .gallery-header h2 {
+        margin: 0;
+        color: var(--pink);
+      }
+
+      .gallery-header p {
+        margin: 0.45rem 0 0;
+      }
+
+      .photo-grid {
+        column-count: 2;
+        column-gap: 0.9rem;
+      }
+
+      .photo {
+        margin: 0;
+        margin-bottom: 0.9rem;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid #ffd9e9;
+        box-shadow: 0 10px 26px rgba(255, 111, 163, 0.2);
+        break-inside: avoid;
+      }
+
+      .photo img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      @media (max-width: 640px) {
+        .photo-grid {
+          column-count: 1;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .love-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .love-grid .card:last-child {
+          grid-column: 1 / -1;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .love-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .love-grid .card:last-child {
+          grid-column: auto;
+        }
       }
     </style>
   </head>
@@ -182,51 +243,159 @@ const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 *
         </article>
       </section>
 
-      <section class='audio-section'>
-        <p>🎵 Giai điệu yêu thương sẽ tự phát khi trang mở.</p>
+      <section class='gallery'>
+        <div class='gallery-header'>
+          <h2>Khoảnh khắc của tụi mình</h2>
+          <p>Mỗi tấm hình là một lần tim rung lên thêm chút nữa.</p>
+        </div>
+
+        <div class='photo-grid'>
+          <figure class='photo'>
+            <img src={`${baseUrl}images/moment-01.jpg`} alt='Cả hai chụp selfie bên bờ biển lúc hoàng hôn.' width='1536' height='2048' loading='eager' decoding='async' fetchpriority='high' sizes='(max-width: 640px) 92vw, (max-width: 980px) 46vw, 440px' />
+          </figure>
+          <figure class='photo'>
+            <img src={`${baseUrl}images/moment-02.jpg`} alt='Hai bạn chụp ảnh dễ thương trong chuyến đi.' width='1536' height='2048' loading='lazy' decoding='async' sizes='(max-width: 640px) 92vw, (max-width: 980px) 46vw, 440px' />
+          </figure>
+          <figure class='photo'>
+            <img src={`${baseUrl}images/moment-03.jpg`} alt='Khoảnh khắc hôn má ngọt ngào trên biển.' width='1536' height='2048' loading='lazy' decoding='async' sizes='(max-width: 640px) 92vw, (max-width: 980px) 46vw, 440px' />
+          </figure>
+          <figure class='photo'>
+            <img src={`${baseUrl}images/moment-04.jpg`} alt='Nụ cười hạnh phúc của cả hai vào buổi tối.' width='1536' height='2048' loading='lazy' decoding='async' sizes='(max-width: 640px) 92vw, (max-width: 980px) 46vw, 440px' />
+          </figure>
+          <figure class='photo'>
+            <img src={`${baseUrl}images/moment-05.jpg`} alt='Bức ảnh kỷ niệm vui vẻ của cả hai.' width='946' height='2048' loading='lazy' decoding='async' sizes='(max-width: 640px) 92vw, (max-width: 980px) 46vw, 440px' />
+          </figure>
+        </div>
       </section>
     </main>
-
     <script>
-      const audioContext = new window.AudioContext();
+      // @ts-nocheck
+      const audioWindow = window;
+      const AudioContextClass = audioWindow.AudioContext || audioWindow.webkitAudioContext;
+      let audioContext = null;
+      let hasPlayed = false;
 
-      const playCuteMelody = () => {
-        const notes = [523.25, 659.25, 783.99, 659.25, 523.25, 659.25, 783.99, 1046.5];
-        let time = audioContext.currentTime;
+      const midiToFreq = (midi) => 440 * 2 ** ((midi - 69) / 12);
 
-        for (const note of notes) {
-          const oscillator = audioContext.createOscillator();
-          const gainNode = audioContext.createGain();
+      const playNote = (
+        context,
+        freq,
+        startTime,
+        duration,
+        type,
+        volume
+      ) => {
+        const oscillator = context.createOscillator();
+        const gainNode = context.createGain();
 
-          oscillator.type = 'sine';
-          oscillator.frequency.value = note;
+        oscillator.type = type;
+        oscillator.frequency.setValueAtTime(freq, startTime);
 
-          gainNode.gain.setValueAtTime(0, time);
-          gainNode.gain.linearRampToValueAtTime(0.12, time + 0.03);
-          gainNode.gain.linearRampToValueAtTime(0, time + 0.32);
+        gainNode.gain.setValueAtTime(0.0001, startTime);
+        gainNode.gain.exponentialRampToValueAtTime(volume, startTime + 0.04);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
 
-          oscillator.connect(gainNode);
-          gainNode.connect(audioContext.destination);
+        oscillator.connect(gainNode);
+        gainNode.connect(context.destination);
 
-          oscillator.start(time);
-          oscillator.stop(time + 0.34);
+        oscillator.start(startTime);
+        oscillator.stop(startTime + duration + 0.02);
+      };
 
-          time += 0.16;
+      const ensureAudioContext = () => {
+        if (!AudioContextClass) {
+          return null;
         }
+
+        if (!audioContext) {
+          audioContext = new AudioContextClass();
+        }
+
+        return audioContext;
+      };
+
+      const scheduleRomanticSong = (context, startTime) => {
+        const beat = 60 / 84;
+        const sectionBars = 8;
+        const progression = [
+          [60, 64, 67],
+          [57, 60, 64],
+          [65, 69, 72],
+          [67, 71, 74],
+          [60, 64, 67],
+          [57, 60, 64],
+          [62, 65, 69],
+          [67, 71, 74]
+        ];
+        const melodyA = [72, 74, 76, 74, 72, 71, 69, 67];
+        const melodyB = [72, 76, 79, 76, 74, 72, 71, 69];
+
+        for (let bar = 0; bar < sectionBars; bar += 1) {
+          const chord = progression[bar];
+          const sectionStart = startTime + bar * beat * 4;
+
+          for (const note of chord) {
+            playNote(context, midiToFreq(note), sectionStart, beat * 3.8, 'triangle', 0.045);
+            playNote(context, midiToFreq(note + 12), sectionStart + beat * 2, beat * 1.8, 'sine', 0.018);
+          }
+
+          playNote(context, midiToFreq(chord[0] - 12), sectionStart, beat * 0.9, 'sine', 0.03);
+          playNote(context, midiToFreq(chord[0] - 12), sectionStart + beat * 2, beat * 0.9, 'sine', 0.03);
+
+          const phrase = bar < 4 ? melodyA : melodyB;
+          for (let step = 0; step < phrase.length; step += 1) {
+            const note = phrase[step];
+            const noteStart = sectionStart + step * (beat * 0.5);
+            playNote(context, midiToFreq(note), noteStart, beat * 0.45, 'sine', 0.05);
+          }
+        }
+
+        return beat * 4 * sectionBars;
       };
 
       const startMelody = async () => {
-        if (audioContext.state === 'suspended') {
-          await audioContext.resume();
+        if (hasPlayed) {
+          return true;
         }
 
-        playCuteMelody();
+        const context = ensureAudioContext();
+        if (!context) {
+          return false;
+        }
+
+        try {
+          if (context.state !== 'running') {
+            await context.resume();
+          }
+
+          let nextStart = context.currentTime + 0.08;
+          const loopDuration = scheduleRomanticSong(context, nextStart);
+          nextStart += loopDuration;
+
+          window.setInterval(() => {
+            scheduleRomanticSong(context, nextStart);
+            nextStart += loopDuration;
+          }, Math.floor(loopDuration * 1000) - 120);
+
+          hasPlayed = true;
+          return true;
+        } catch {
+          return false;
+        }
       };
 
-      startMelody();
+      const startFromUserInteraction = async () => {
+        const started = await startMelody();
+        if (started) {
+          window.removeEventListener('pointerdown', startFromUserInteraction);
+          window.removeEventListener('keydown', startFromUserInteraction);
+        }
+      };
 
-      window.addEventListener('pointerdown', startMelody, { once: true });
-      window.addEventListener('keydown', startMelody, { once: true });
+      window.addEventListener('pointerdown', startFromUserInteraction);
+      window.addEventListener('keydown', startFromUserInteraction);
+
+      startMelody();
     </script>
   </body>
 </html>
